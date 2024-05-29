@@ -1,8 +1,15 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
+import type { Metadata } from "next";
+// import { Montserrat } from "@next/font/google";
+import { Inter, Montserrat_Alternates } from "next/font/google";
+import { Providers } from "../../context/redux.provider";
+import Header from "./components/Header";
 
-const inter = Inter({ subsets: ["latin"] });
+const monstserrat = Montserrat_Alternates({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  variable: "--font-monstserrat",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -11,12 +18,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
+    <html lang='en'>
+      <body className={`${monstserrat.className}  block items-center`}>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
+      </body>
     </html>
   );
 }
